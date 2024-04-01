@@ -24,11 +24,28 @@ header {
 }
 
 header,
-form {
+.main-wrapper form {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 20vh;
+}
+
+.main-wrapper {
+  max-width: 600px;
+  margin: 0 auto;
+  gap: 2rem;
+  background: #78787845;
+  box-shadow: #0000003d 0px 3px 8px;
+  backdrop-filter: blur(5px);
+  border: 2px solid #7878784d;
+  border-radius: 5px;
+  padding: 0 20px 2.5rem;
+}
+
+form {
+  width: 100%;
+  margin: 0 auto;
 }
 
 form input,
@@ -51,7 +68,6 @@ form button {
   &:hover {
     color: #0d538c;
     background-color: #fff;
-    /* border-left: 2px solid #4d844f; */
   }
 }
 
@@ -62,12 +78,12 @@ form button {
 
   .list {
     /* min-width: 30%; */
-    min-width: 300px;
+    min-width: 400px;
   }
 
   .todoList {
     margin: 0.5rem;
-    font-size: 1rem;
+    font-size: 1.2rem;
     background-color: #78787845;
     backdrop-filter: blur(5px);
     color: #ffdfdb;
@@ -92,10 +108,21 @@ form button {
 
   .check-btn {
     background-color: #318a31;
+    font-weight: 600;
+
+    &:hover {
+      background-color: #fff;
+      color: #318a31;
+    }
   }
 
   .delete-btn {
     background-color: #c12f24;
+
+    &:hover {
+      background-color: #fff;
+      color: #c12f24;
+    }
   }
 
   .new-todo {
@@ -108,9 +135,8 @@ form button {
   }
 
   /* .completed {
-    /text-decoration: line-through; 
-    opacity: 0.5;
-  }*/
+    text-decoration-thickness: 4rem;
+  } */
 
   .delete-animation {
     transform: translateY(8rem) rotateZ(20deg);
