@@ -1,45 +1,60 @@
-console.log("worksss!");
+console.log("it works!");
 
-const form = document.getElementById("add-task");
-const ul = document.getElementById("tasks");
+const input = document.querySelector(".input");
+const todoBtn = document.querySelector(".todo-btn");
+const list = document.querySelector(".list");
 
-function handleSubmitButton(event) {
-  event.preventDefault();
-  const message = document.getElementById("description");
-  const textInput = message.value;
+// functions
+function handleAdd(e) {
+  e.preventDefault();
 
-  const li = document.createElement("li");
-  const checkButton = document.createElement("button");
-  const deleteButton = document.createElement("button");
+  const todoList = document.createElement("div");
+  todoList.classList.add("todoList");
+  const task = document.createElement("li");
+  task.innerText = input.value;
 
-  checkButton.classList.add("check");
-  checkButton.textContent = "Check";
-  deleteButton.classList.add("delete");
-  deleteButton.textContent = "Delete";
+  task.classList.add("new-todo");
+  todoList.appendChild(task);
 
-  li.textContent = `${textInput}`;
-  ul.appendChild(li);
-  li.appendChild(checkButton);
-  li.appendChild(deleteButton);
+  // check button
+  const checkBtn = document.createElement("button");
+  checkBtn.innerHTML = `<i class="fa-solid fa-check"></i>`;
 
-  console.log(checkButton);
-  console.log(deleteButton);
+  checkBtn.classList.add("check-btn");
+  todoList.appendChild(checkBtn);
 
-  message.value = "";
+  // delete button
+  const deleteBtn = document.createElement("button");
+  deleteBtn.innerHTML = `<i class="fa-solid fa-trash-can"></i>`;
+
+  deleteBtn.classList.add("delete-btn");
+  todoList.appendChild(deleteBtn);
+
+  list.appendChild(todoList);
+  input.value = "";
 }
 
-function handleCheck(event) {
-  if (event.target.matches("li")) {
-    if (event.target.style.textDecoration === "line-through") {
-      event.target.style.textDecoration = "none";
-    } else {
-      event.target.style.textDecoration = "line-through";
-    }
-  } else if (event.target.matches(".delete")) {
-    const li = event.target.closest("li");
-    li.remove();
+function handleButtons(e) {
+  // console.log(e.target);
+  const item = e.target;
+
+  if (item.classList[0] === "delete-btn") {
+    const todo = item.parentElement;
+    todo.classList.add("delete-animation") //falling
+    // to execute remove function after animation
+    todo.addEventListener("transitionend", function(){
+      todo.remove()
+    })
+  }
+
+  if (item.classList[0] === "check-btn") {
+    const todo = item.parentElement;
+    todo.classList.toggle("completed");
+    todo.style.textDecoration = "line-through"
+    todo.style.opacity = 0.5
   }
 }
 
-form.addEventListener("submit", handleSubmitButton);
-document.addEventListener("click", handleCheck);
+// Event Listeners
+todoBtn.addEventListener("click", handleAdd);
+list.addEventListener("click", handleButtons);
